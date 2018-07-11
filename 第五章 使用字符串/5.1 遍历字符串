@@ -1,0 +1,15 @@
+--5.1 遍历字符串
+CREATE OR REPLACE VIEW V AS SELECT '天天向上' AS 汉字, 'TTXS' AS 首拼 FROM DUAL; 
+
+--CONNECT BY是树形查询中的一个子句，后面的LEVEL是一个“伪列”
+SELECT LEVEL FROM DUAL CONNECT BY LEVEL <= 4;
+
+SELECT V.汉字, V.首拼, LEVEL FROM V CONNECT BY LEVEL <= LENGTH(V.汉字);
+
+SELECT V.汉字,
+       V.首拼,
+       LEVEL,
+       SUBSTR(V.汉字, LEVEL, 1) AS 汉字拆分,
+       SUBSTR(V.首拼, LEVEL, 1) AS 首拼拆分
+  FROM V
+CONNECT BY LEVEL <= LENGTH(V.汉字)
