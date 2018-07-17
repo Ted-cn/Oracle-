@@ -1,0 +1,8 @@
+--6.2 生成累计和
+SELECT EMPNO AS 编号,
+       ENAME AS 姓名,
+       SAL AS 人工成本,
+       SUM(SAL) OVER(ORDER BY EMPNO) AS 累计成本
+  FROM EMP
+ WHERE DEPTNO = 30
+ ORDER BY EMPNO;
